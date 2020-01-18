@@ -32,7 +32,7 @@ public class CraftExtinguisher extends JavaPlugin{
 		
 		if(!new File(getDataFolder(), "config.yml").exists()) saveDefaultConfig();
 		
-		reload();
+		reload(true);
 		
 		pm.registerEvents(new PlayerListeners(), instance);
 		pm.registerEvents(new UpdateListener(instance), instance);
@@ -42,18 +42,21 @@ public class CraftExtinguisher extends JavaPlugin{
 	}
 	
 	public void onDisable(){
+		reload(false);
 		
+		getConfig().set("item", item);
+		saveConfig();
 		
 		instance = null;
 	}
 
-	public void reload() {
+	public void reload(boolean reloadItem) {
 		reloadConfig();
 		
 		blockRegenDelay = getConfig().getInt("blockRegenDelay", 60);
 		cooldownDelay = getConfig().getInt("cooldownDelay", 10);
 		
-		item = getConfig().getItemStack("Item", new ItemStack(Material.SNOW_BALL, 1));
+		if(reloadItem) item = getConfig().getItemStack("item", new ItemStack(Material.SNOW_BALL, 1));
 		
 		if(getConfig().contains("blockedWorlds")){
 			blockedWorlds = (ArrayList<String>) getConfig().getStringList("blockedWorlds");

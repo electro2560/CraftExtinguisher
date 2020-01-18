@@ -4,6 +4,6 @@ blockRegenDelay: 60
 #In ticks
 cooldownDelay: 10
 blockedWorlds: []
-Item:
+item:
   ==: org.bukkit.inventory.ItemStack
   type: SNOW_BALL
