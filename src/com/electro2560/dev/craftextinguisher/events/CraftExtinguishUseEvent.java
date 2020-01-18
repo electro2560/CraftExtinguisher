@@ -21,6 +21,10 @@ public class CraftExtinguishUseEvent extends Event implements Cancellable{
 		this.player = player;
 	}
 	
+	public Player getPlayer() {
+		return player;
+	}
+	
 	@Override
 	public boolean isCancelled() {
 		return cancelled;
