@@ -18,7 +18,7 @@ import org.json.simple.parser.ParseException;
 import com.electro2560.dev.craftextinguisher.utils.Utils;
 
 public class UpdateUtil {
-	public static final String PREFIX = "�a�l[CraftExtinguisher] �a";
+	public static final String PREFIX = "§a§l[CraftExtinguisher] §a";
 	private static final String URL = "http://dev.electro2560.com/plugins/CraftExtinguisher/info.json";
 
 	public static void sendUpdateMessage(final Player p, final Plugin plugin) {
@@ -57,7 +57,7 @@ public class UpdateUtil {
 		if (current.compareTo(newest) < 0) {
 			String updates = "\n";
 			for (String s : getChanges()) {
-				s = s.replace('&', '�');
+				s = s.replace('&', '§');
 				updates += " * " + s + "\n";
 			}
 			return "There is a newer version available: " + newest.toString() + updates;
@@ -71,7 +71,7 @@ public class UpdateUtil {
 			URL url = new URL(URL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setUseCaches(true);
-			connection.addRequestProperty("User-Agent", "ForceGrow " + Utils.getVersion());
+			connection.addRequestProperty("User-Agent", "CraftExtinguisher " + Utils.getVersion());
 			connection.setDoOutput(true);
 			BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
@@ -101,7 +101,7 @@ public class UpdateUtil {
 			URL url = new URL(URL);
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setUseCaches(true);
-			connection.addRequestProperty("User-Agent", "ForceGrow " + Utils.getVersion());
+			connection.addRequestProperty("User-Agent", "CraftExtinguisher " + Utils.getVersion());
 			connection.setDoOutput(true);
 			BufferedReader br = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
