@@ -21,7 +21,7 @@ public class CraftExtinguishCommand implements CommandExecutor{
 			return true;
 		}
 		
-		if(!sender.hasPermission(Perms.isAdmin)){
+		if(!sender.hasPermission(Perms.admin)){
 			sender.sendMessage(Utils.color("&cNo permission."));
 			return true;
 		}

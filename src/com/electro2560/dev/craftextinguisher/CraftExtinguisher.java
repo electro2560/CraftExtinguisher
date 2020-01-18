@@ -20,16 +20,35 @@ public class CraftExtinguisher extends JavaPlugin{
 	
 	private static CraftExtinguisher instance;
 	
-	static int blockRegenDelay;
-	static ArrayList<String> blockedWorlds = new ArrayList<String>();
-	static ItemStack item;
-	static int cooldownDelay;
-	static HashMap<String, Boolean> cooldowns = new HashMap<String, Boolean>();
+	public int blockRegenDelay;
+	public ArrayList<String> blockedWorlds = new ArrayList<String>();
+	public ItemStack item;
+	public int cooldownDelay;
+	public HashMap<String, Boolean> cooldowns = new HashMap<String, Boolean>();
 	
 	public void onEnable(){
+		
 		instance = this;
 		
 		if(!new File(getDataFolder(), "config.yml").exists()) saveDefaultConfig();
+		
+		reload();
+		
+		pm.registerEvents(new PlayerListeners(), instance);
+		pm.registerEvents(new UpdateListener(instance), instance);
+		
+		getCommand("craftextinguish").setExecutor(new CraftExtinguishCommand());
+		
+	}
+	
+	public void onDisable(){
+		
+		
+		instance = null;
+	}
+
+	public void reload() {
+		reloadConfig();
 		
 		blockRegenDelay = getConfig().getInt("blockRegenDelay", 60);
 		cooldownDelay = getConfig().getInt("cooldownDelay", 10);
@@ -41,65 +60,10 @@ public class CraftExtinguisher extends JavaPlugin{
 			if(blockedWorlds == null) blockedWorlds = new ArrayList<String>();
 		}
 		
-		pm.registerEvents(new PlayerListeners(), instance);
-		pm.registerEvents(new UpdateListener(instance), instance);
-		
-		getCommand("craftextinguish").setExecutor(new CraftExtinguishCommand());
-		
 	}
 	
-	public void onDisable(){
-		getConfig().set("blockRegenDelay", blockRegenDelay);
-		getConfig().set("Item", item);
-		getConfig().set("blockedWorlds", blockedWorlds);
-		
-		saveConfig();
-		
-		instance = null;
-	}
-
 	public static CraftExtinguisher get() {
 		return instance;
-	}
-
-	public String getVersion() {
-		return this.getDescription().getVersion();
-	}
-	
-	public static int getBlockRegenDelay() {
-		return blockRegenDelay;
-	}
-
-	public static void setBlockRegenDelay(int blockRegenDelay) {
-		CraftExtinguisher.blockRegenDelay = blockRegenDelay;
-	}
-
-	public static ArrayList<String> getBannedWorlds() {
-		return blockedWorlds;
-	}
-
-	public static ItemStack getItem() {
-		return item;
-	}
-
-	public static void setItem(ItemStack item) {
-		CraftExtinguisher.item = item;
-	}
-
-	public static int getCoolDownDelay() {
-		return cooldownDelay;
-	}
-
-	public static void setCoolDownDelay(int coolDownDelay) {
-		CraftExtinguisher.cooldownDelay = coolDownDelay;
-	}
-
-	public static HashMap<String, Boolean> getCooldowns() {
-		return cooldowns;
-	}
-
-	public static void setCooldowns(HashMap<String, Boolean> cooldowns) {
-		CraftExtinguisher.cooldowns = cooldowns;
 	}
 
 }

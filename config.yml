@@ -1,5 +1,7 @@
 checkForUpdates: true
+#In ticks
 blockRegenDelay: 60
+#In ticks
 cooldownDelay: 10
 blockedWorlds: []
 Item:

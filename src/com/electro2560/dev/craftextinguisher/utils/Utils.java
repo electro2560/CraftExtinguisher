@@ -27,7 +27,7 @@ public class Utils {
 	}
 	
 	public static String getVersion(){
-		return CraftExtinguisher.get().getVersion();
+		return CraftExtinguisher.get().getDescription().getVersion();
 	}
 	
 	public static String color(String str) {

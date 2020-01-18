@@ -7,3 +7,11 @@ commands:
   craftextinguish:
     description: Used to configure plugin.
     aliases: [ce]
+    permission: craftextinguisher.admin
+permissions:
+  craftextinguisher.use:
+    description: Access to use craft extinguisher
+    default: true
+  craftextinguisher.admin:
+    description: Access to admin commands and update checker
+    default: op

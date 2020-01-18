@@ -13,47 +13,47 @@ import com.electro2560.dev.craftextinguisher.CraftExtinguisher;
 import com.electro2560.dev.craftextinguisher.utils.Perms;
 import com.electro2560.dev.craftextinguisher.utils.Utils;
 
-import net.md_5.bungee.api.ChatColor;
-
 public class PlayerListeners implements Listener{
-
+	
+	CraftExtinguisher ce = CraftExtinguisher.get();
+	
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void interact(PlayerInteractEvent event){
 		final Player p = event.getPlayer();
 		
 		if(!p.hasPermission(Perms.canUse)){
-			p.sendMessage(ChatColor.RED + "No permission!");
+			p.sendMessage(Utils.color("&cYou can't use that item."));
 			return;
 		}
 		
-		if(CraftExtinguisher.getBannedWorlds().contains(p.getWorld().getName())){
-			p.sendMessage(ChatColor.RED + "You can't use that in this world!");
+		if(ce.blockedWorlds.contains(p.getWorld().getName())){
+			p.sendMessage(Utils.color("&cYou can't use that in this world!"));
 			return;
 		}
 		
-		if(!CraftExtinguisher.getCooldowns().containsKey(p.getName())) CraftExtinguisher.getCooldowns().put(p.getName(), false);
+		if(!ce.cooldowns.containsKey(p.getName())) ce.cooldowns.put(p.getName(), false);
 		
-		if(CraftExtinguisher.getCooldowns().get(p.getName())){
-			p.sendMessage(ChatColor.RED + "You must wait longer before you can use this again!");
+		if(ce.cooldowns.get(p.getName())){
+			p.sendMessage(Utils.color("&cYou must wait longer before you can use this again!"));
 			event.setCancelled(true);
 			return;
 		}
 		if(event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) return;
 		
-		if(Utils.itemEquals(p.getItemInHand(), CraftExtinguisher.getItem())){
+		if(Utils.itemEquals(p.getItemInHand(), ce.item)){
 			
 			final Block b = Utils.getTargetBlock(p);
 			if(b == null || b.getType() == Material.AIR) return;
 			
-			//Cool down
-			CraftExtinguisher.getCooldowns().put(p.getName(), true);
+			//Cooldown
+			ce.cooldowns.put(p.getName(), true);
 			new BukkitRunnable() {
 				@Override
 				public void run() {
-					CraftExtinguisher.getCooldowns().put(p.getName(), false);
+					ce.cooldowns.put(p.getName(), false);
 				}
-			}.runTaskLater(CraftExtinguisher.get(), CraftExtinguisher.getCoolDownDelay());
+			}.runTaskLater(CraftExtinguisher.get(), ce.cooldownDelay);
 			
 			//Set target block to water
 			final Material type = b.getType();
@@ -65,7 +65,7 @@ public class PlayerListeners implements Listener{
 					b.setType(type);
 					b.setData(data);
 				}
-			}.runTaskLater(CraftExtinguisher.get(), CraftExtinguisher.getBlockRegenDelay());
+			}.runTaskLater(CraftExtinguisher.get(), ce.blockRegenDelay);
 		}
 		
 	}
