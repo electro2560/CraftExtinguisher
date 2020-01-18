@@ -1,4 +1,4 @@
-package com.electro2560.dev.CraftExtinguisher.utils;
+package com.electro2560.dev.craftextinguisher.utils;
 
 import org.bukkit.permissions.Permission;
 

@@ -1,5 +1,6 @@
-package com.electro2560.dev.CraftExtinguisher;
+package com.electro2560.dev.craftextinguisher;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,50 +10,48 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import com.electro2560.dev.CraftExtinguisher.commands.CraftExtinguishCommand;
-import com.electro2560.dev.CraftExtinguisher.listeners.PlayerListener;
-import com.electro2560.dev.CraftExtinguisher.updater.UpdateListener;
-import com.electro2560.dev.CraftExtinguisher.utils.Utils;
+import com.electro2560.dev.craftextinguisher.commands.CraftExtinguishCommand;
+import com.electro2560.dev.craftextinguisher.listeners.PlayerListeners;
+import com.electro2560.dev.craftextinguisher.updater.UpdateListener;
 
 public class CraftExtinguisher extends JavaPlugin{
 
-	private PluginManager pm = Bukkit.getServer().getPluginManager();
+	PluginManager pm = Bukkit.getServer().getPluginManager();
+	
 	private static CraftExtinguisher instance;
 	
-	private static int blockRegenDelay;
-	private static ArrayList<String> bannedWorlds = new ArrayList<String>();
-	private static ItemStack item;
-	private static int coolDownDelay;
-	private static HashMap<String, Boolean> cooldowns = new HashMap<String, Boolean>();
+	static int blockRegenDelay;
+	static ArrayList<String> blockedWorlds = new ArrayList<String>();
+	static ItemStack item;
+	static int cooldownDelay;
+	static HashMap<String, Boolean> cooldowns = new HashMap<String, Boolean>();
 	
 	public void onEnable(){
 		instance = this;
 		
-		Utils.defaultConfig();
+		if(!new File(getDataFolder(), "config.yml").exists()) saveDefaultConfig();
 		
 		blockRegenDelay = getConfig().getInt("blockRegenDelay", 60);
-		coolDownDelay = getConfig().getInt("coolDownDelay", 10);
+		cooldownDelay = getConfig().getInt("cooldownDelay", 10);
 		
 		item = getConfig().getItemStack("Item", new ItemStack(Material.SNOW_BALL, 1));
 		
-		if(getConfig().contains("bannedWorlds")){
-			bannedWorlds = (ArrayList<String>) getConfig().getStringList("bannedWorlds");
-			if(bannedWorlds == null) bannedWorlds = new ArrayList<String>();
+		if(getConfig().contains("blockedWorlds")){
+			blockedWorlds = (ArrayList<String>) getConfig().getStringList("blockedWorlds");
+			if(blockedWorlds == null) blockedWorlds = new ArrayList<String>();
 		}
 		
-		pm.registerEvents(new PlayerListener(), instance);
+		pm.registerEvents(new PlayerListeners(), instance);
 		pm.registerEvents(new UpdateListener(instance), instance);
 		
 		getCommand("craftextinguish").setExecutor(new CraftExtinguishCommand());
-		
-		if(getConfig().getBoolean("useMetrics", true)) Utils.startMetrics();
 		
 	}
 	
 	public void onDisable(){
 		getConfig().set("blockRegenDelay", blockRegenDelay);
 		getConfig().set("Item", item);
-		getConfig().set("bannedWorlds", bannedWorlds);
+		getConfig().set("blockedWorlds", blockedWorlds);
 		
 		saveConfig();
 		
@@ -76,7 +75,7 @@ public class CraftExtinguisher extends JavaPlugin{
 	}
 
 	public static ArrayList<String> getBannedWorlds() {
-		return bannedWorlds;
+		return blockedWorlds;
 	}
 
 	public static ItemStack getItem() {
@@ -88,11 +87,11 @@ public class CraftExtinguisher extends JavaPlugin{
 	}
 
 	public static int getCoolDownDelay() {
-		return coolDownDelay;
+		return cooldownDelay;
 	}
 
 	public static void setCoolDownDelay(int coolDownDelay) {
-		CraftExtinguisher.coolDownDelay = coolDownDelay;
+		CraftExtinguisher.cooldownDelay = coolDownDelay;
 	}
 
 	public static HashMap<String, Boolean> getCooldowns() {

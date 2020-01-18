@@ -1,4 +1,4 @@
-package com.electro2560.dev.CraftExtinguisher.listeners;
+package com.electro2560.dev.craftextinguisher.listeners;
 
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -9,13 +9,13 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import com.electro2560.dev.CraftExtinguisher.CraftExtinguisher;
-import com.electro2560.dev.CraftExtinguisher.utils.Perms;
-import com.electro2560.dev.CraftExtinguisher.utils.Utils;
+import com.electro2560.dev.craftextinguisher.CraftExtinguisher;
+import com.electro2560.dev.craftextinguisher.utils.Perms;
+import com.electro2560.dev.craftextinguisher.utils.Utils;
 
 import net.md_5.bungee.api.ChatColor;
 
-public class PlayerListener implements Listener{
+public class PlayerListeners implements Listener{
 
 	@SuppressWarnings("deprecation")
 	@EventHandler

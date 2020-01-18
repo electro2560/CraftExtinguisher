@@ -1,4 +1,4 @@
-package com.electro2560.dev.CraftExtinguisher.commands;
+package com.electro2560.dev.craftextinguisher.commands;
 
 import org.bukkit.Material;
 import org.bukkit.command.Command;
@@ -7,8 +7,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import com.electro2560.dev.CraftExtinguisher.CraftExtinguisher;
-import com.electro2560.dev.CraftExtinguisher.utils.Perms;
+import com.electro2560.dev.craftextinguisher.CraftExtinguisher;
+import com.electro2560.dev.craftextinguisher.utils.Perms;
 
 import net.md_5.bungee.api.ChatColor;
 

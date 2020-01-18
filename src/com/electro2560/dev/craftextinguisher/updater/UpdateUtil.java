@@ -1,4 +1,4 @@
-package com.electro2560.dev.CraftExtinguisher.updater;
+package com.electro2560.dev.craftextinguisher.updater;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,10 +15,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import com.electro2560.dev.CraftExtinguisher.utils.Utils;
+import com.electro2560.dev.craftextinguisher.utils.Utils;
 
 public class UpdateUtil {
-	public static final String PREFIX = "§a§l[CraftExtinguisher] §a";
+	public static final String PREFIX = "ï¿½aï¿½l[CraftExtinguisher] ï¿½a";
 	private static final String URL = "http://dev.electro2560.com/plugins/CraftExtinguisher/info.json";
 
 	public static void sendUpdateMessage(final Player p, final Plugin plugin) {
@@ -57,7 +57,7 @@ public class UpdateUtil {
 		if (current.compareTo(newest) < 0) {
 			String updates = "\n";
 			for (String s : getChanges()) {
-				s = s.replace('&', '§');
+				s = s.replace('&', 'ï¿½');
 				updates += " * " + s + "\n";
 			}
 			return "There is a newer version available: " + newest.toString() + updates;

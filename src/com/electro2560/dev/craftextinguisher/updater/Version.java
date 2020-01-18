@@ -1,4 +1,4 @@
-package com.electro2560.dev.CraftExtinguisher.updater;
+package com.electro2560.dev.craftextinguisher.updater;
 
 import org.apache.commons.lang.StringUtils;
 

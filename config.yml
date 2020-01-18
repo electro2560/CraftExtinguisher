@@ -1,0 +1,7 @@
+checkForUpdates: true
+blockRegenDelay: 60
+cooldownDelay: 10
+blockedWorlds: []
+Item:
+  ==: org.bukkit.inventory.ItemStack
+  type: SNOW_BALL

@@ -1,4 +1,4 @@
-package com.electro2560.dev.CraftExtinguisher.updater;
+package com.electro2560.dev.craftextinguisher.updater;
 
 import java.beans.ConstructorProperties;
 
@@ -6,9 +6,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import com.electro2560.dev.CraftExtinguisher.CraftExtinguisher;
-import com.electro2560.dev.CraftExtinguisher.utils.Perms;
-import com.electro2560.dev.CraftExtinguisher.utils.Utils;
+import com.electro2560.dev.craftextinguisher.CraftExtinguisher;
+import com.electro2560.dev.craftextinguisher.utils.Perms;
+import com.electro2560.dev.craftextinguisher.utils.Utils;
 
 public class UpdateListener implements Listener {
 	private final CraftExtinguisher plugin;
