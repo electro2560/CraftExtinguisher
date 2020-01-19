@@ -2,7 +2,7 @@ name: CraftExtinguisher
 main: com.electro2560.dev.craftextinguisher.CraftExtinguisher
 author: ElectroBoy2560
 website: http://dev.electro2560.com/
-version: 1.2.0
+version: 1.2.1
 commands:
   craftextinguish:
     description: Used to configure plugin.
